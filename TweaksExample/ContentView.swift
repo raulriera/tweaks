@@ -11,24 +11,31 @@ import Tweaks
 struct ContentView: View {
     @Tweakable("appTitle") var title = "Hello, world!"
     @Tweakable("borderThickness") var borderThickness = 0.0
+    @Tweakable("counter") var counter = 0
+    @Tweakable("isDark") var isDarkMode: Bool = false
     @State var isTweaksPresented: Bool = false
     
     var body: some View {        
         VStack {
             Text(title)
+            Text(counter, format: .number)
             Rectangle()
                 .fill(.gray)
                 .border(.black, width: borderThickness)
                 .frame(width: 200, height: 200)
-            Button("Show Tweaks") {
-                isTweaksPresented.toggle()
-            }
-            .sheet(isPresented: $isTweaksPresented) {
-                TweaksEditor()
-                    .presentationDetents([.medium])
+        }
+        .sheet(isPresented: $isTweaksPresented) {
+            TweaksEditor()
+                .presentationDetents([.medium])
+        }
+        .toolbar {
+            ToolbarItem {
+                Button("Tweaks", systemImage: "rectangle.badge.sparkles") {
+                    isTweaksPresented.toggle()
+                }
             }
         }
-        .padding()
+        .preferredColorScheme(isDarkMode ? .dark : .light)
     }
 }
 
