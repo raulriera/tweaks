@@ -8,17 +8,14 @@
 import SwiftUI
 
 public struct TweaksEditor: View {
-    @State private var registry = TweaksRegistry.shared
+    private let registry = TweaksRegistry.shared
     
     public init() {}
     
     public var body: some View {
-        List {
+        Form {
             ForEach(registry.entries) { entry in
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(entry.key)
-                        .font(.headline)
-                    
+                VStack(alignment: .leading, spacing: 8) {                    
                     switch entry.type {
                     case .string:
                         StringEditor(
