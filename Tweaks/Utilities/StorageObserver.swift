@@ -5,6 +5,8 @@
 //  Created by Raul Riera on 2026-01-14.
 //
 
+import SwiftUI
+import Combine
 
 @Observable
 class StorageObserver {
