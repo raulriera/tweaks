@@ -13,16 +13,16 @@ struct TweakEditor<Value: Equatable, Content: View>: View {
     @State private var value: Value
     @ViewBuilder let content: (Binding<Value>) -> Content
     
-    init(
-        key: String,
-        defaultValue: Value,
-        @ViewBuilder content: @escaping (Binding<Value>) -> Content
+    init(key: String,
+         defaultValue: Value,
+         @ViewBuilder content: @escaping (Binding<Value>) -> Content
     ) {
         self.key = key
         self.defaultValue = defaultValue
         self.content = content
-        let loadedValue = TweaksStore.shared.getValue(for: key, defaultValue: defaultValue)
-        _value = State(initialValue: loadedValue)
+        
+        let initialValue = TweaksStore.shared.getValue(for: key, defaultValue: defaultValue)
+        _value = State(initialValue: initialValue)
     }
     
     var body: some View {

@@ -15,19 +15,19 @@ class TweaksStore {
     private let storageKey = "__tweaks_storage__"
     private let store = UserDefaults.standard
     private var cancellable: AnyCancellable?
-    private var updateCounter = 0
+    private var _internalCounter = 0
     
     private init() {
         cancellable = NotificationCenter.default
             .publisher(for: UserDefaults.didChangeNotification)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.updateCounter += 1
+                self?._internalCounter += 1
             }
     }
     
     func getValue<T>(for key: String, defaultValue: T) -> T {
-        _ = updateCounter // Track for observation
+        _ = _internalCounter
         
         guard let data = store.data(forKey: storageKey),
               let dict = try? JSONSerialization.jsonObject(with: data) as? [String: Any],

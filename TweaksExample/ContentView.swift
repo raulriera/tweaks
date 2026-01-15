@@ -12,7 +12,7 @@ struct ContentView: View {
     @Tweakable("appTitle") var title = "Hello, world!"
     @Tweakable("borderThickness") var borderThickness = 0.0
     @Tweakable("counter") var counter = 0
-    @Tweakable("isDark") var isDarkMode: Bool = false
+    @Tweakable("isDarkThemeEnabled") var isDarkModeEnabled: Bool = false
     @State var isTweaksPresented: Bool = false
     
     var body: some View {        
@@ -35,7 +35,7 @@ struct ContentView: View {
                 }
             }
         }
-        .preferredColorScheme(isDarkMode ? .dark : .light)
+        .preferredColorScheme(isDarkModeEnabled ? .dark : .light)
     }
 }
 

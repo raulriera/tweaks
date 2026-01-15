@@ -32,7 +32,9 @@ public struct TweaksEditor: View {
                         
                     case .int:
                         TweakEditor(key: entry.key, defaultValue: entry.defaultValue as? Int ?? 0) { $value in
-                            Stepper("\(value)", value: $value)
+                            Section(header: Text(entry.key)) {
+                                Stepper("\(value)", value: $value)
+                            }
                         }
                         
                     case .double:
